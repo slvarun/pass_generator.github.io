@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+</head>
+<body>
+    <div class="content">
+        <button id="generateBtn">Generate a password!</button>
+        <b><p id="password">The password will appear here. Password length is 12 characters.</p></b>
+        <br><button id="copyBtn">Copy the password to clipboard</button>
+    </div>
+</body>
+<style>
+    .content {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    body {
+        background-color: bisque;
+    }
+    #password {
+        font-size: xx-large;
+        font-family: monospace;
+    }
+    #generateBtn {
+        font-size: large;
+        background-color: green;
+        padding: 10px 24px;
+        color: whitesmoke;
+    }
+    #copyBtn {
+        background-color: black;
+        color: white;
+        font-size: medium;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border: 1px solid #555555;
+        padding: 13px 16px;
+        margin: auto;
+        display: inline-block;
+    }
+    #copyBtn:hover {
+        background-color: white;
+        color: black;
+    }
+</style>
+<script type="text/javascript">
+    let btn = document.querySelector("#generateBtn");
+    let copyBtn = document.querySelector("#copyBtn");
+    let passwordField = document.querySelector("#password");
+    const allowedCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=/,.;><{}[]';
+    const charactersLength = allowedCharacters.length;
+    const length = 12;
+
+    btn.onclick = ()=>{
+        passwordField.innerHTML = getRandomPass();
+    }
+
+    copyBtn.onclick = ()=>{
+        navigator.clipboard.writeText(passwordField.innerHTML);
+        alert("Copied the password to clipboard.");        
+    }
+
+    function getRandomPass() {
+        let result = '';
+        let counter = 0;
+        while (counter < length) {
+            result += allowedCharacters.charAt(Math.floor(Math.random() * charactersLength)); // scale the random number to an index and get a character from that index from the string
+            counter += 1;
+        }
+        return result;
+    }
+
+</script>
+</html>
